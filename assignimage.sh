@@ -39,5 +39,8 @@ docker pull ${HYPERKUBE_IMAGE}
 docker pull ${APISERVER_IMAGE}
 docker pull ${REGISTRY_IMAGE}
 
+#attention to load the pause image!!!
+docker load -i ./image/pause.tar
+
 
 

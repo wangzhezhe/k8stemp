@@ -154,7 +154,7 @@ set /coreos.com/network/config '{ "Network": "10.1.0.0/16" }'
 
 	
 	sleep 5
-	docker -H unix:///var/run/docker-bootstrap.sock run --net=host -d -v /var/run/docker.sock:/var/run/docker.sock  -v ${LOCAL_PATH}/image/hyper/master-two.json:/etc/kubernetes/manifests-two/master.json  ${HYPERKUBE_IMAGE} /hyperkube kubelet --api_servers=http://${PRIVATE_IP}:8080 --v=2 --address=${PRIVATE_IP} --enable_server --hostname_override=${PRIVATE_IP} --config=/etc/kubernetes/manifests-two --cluster_dns=192.168.3.10 --cluster_domain=cluster.local
+	docker -H unix:///var/run/docker-bootstrap.sock run --net=host -d -v /var/run/docker.sock:/var/run/docker.sock  -v ${LOCAL_PATH}/image/hyper/master-two.json:/etc/kubernetes/manifests-two/master.json  ${HYPERKUBE_IMAGE} /hyperkube kubelet --api_servers=http://${PRIVATE_IP}:8080 --v=2 --address=${PRIVATE_IP} --enable_server --hostname_override=${PRIVATE_IP} --config=/etc/kubernetes/manifests-two/master.json --cluster_dns=192.168.3.10 --cluster_domain=cluster.local
 	sleep 5
 	docker -H unix:///var/run/docker-bootstrap.sock run -d --net=host --privileged ${HYPERKUBE_IMAGE} /hyperkube proxy --master=http://${PRIVATE_IP}:8080 --v=2
 	sleep 5

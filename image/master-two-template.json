@@ -12,6 +12,8 @@
               "/hyperkube",
               "controller-manager",
               "--master=PRIVATEIP:8080",
+			  "--machines=PRIVATEIP",
+			  "--sync_nodes=true",
               "--v=2"
         ]
     },
