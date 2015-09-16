@@ -7,34 +7,36 @@
   "containers":[
     {
       "name": "controller-manager",
-      "image": "gcr.io/google_containers/hyperkube:VERSION",
+      "image": "k8szju/hyper:1.0.5",
       "command": [
               "/hyperkube",
               "controller-manager",
-              "--master=127.0.0.1:8080",
+              "--master=10.10.103.135:8080",
               "--v=2"
         ]
     },
-    {
+	 {
       "name": "apiserver",
-      "image": "gcr.io/google_containers/hyperkube:VERSION",
+      "image": "k8szju/hyper:1.0.5",
       "command": [
               "/hyperkube",
               "apiserver",
-              "--portal-net=10.0.0.1/24",
-              "--address=0.0.0.0",
-              "--etcd_servers=http://127.0.0.1:4001",
-              "--cluster_name=kubernetes",
-              "--v=2"
+              "--etcd-servers=--etcd_servers=http://10.10.103.135:2379,http://10.10.103.135:10002,http://10.10.103.135:10004",
+              "--cluster-name=kubernetes",
+              "--service-cluster-ip-range=192.168.3.0/24",
+              "--client-ca-file=/srv/kubernetes/ca.crt",
+              "--tls-cert-file=/srv/kubernetes/server.cert",
+              "--tls-private-key-file=/srv/kubernetes/server.key",
+              "--admission-control=NamespaceLifecycle,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota"
         ]
     },
     {
       "name": "scheduler",
-      "image": "gcr.io/google_containers/hyperkube:VERSION",
+      "image": "k8szju/hyper:1.0.5",
       "command": [
               "/hyperkube",
               "scheduler",
-              "--master=127.0.0.1:8080",
+              "--master=10.10.103.135:8080",
               "--v=2"
         ]
     }
